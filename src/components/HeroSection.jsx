@@ -14,28 +14,29 @@ const HeroSection = () => {
             <div className="text-white">
               <TypeAnimation
                 sequence={[
-                  "I'm Anthony, junior dev",
-                  2000,
-                  'I do love C, Rust and ...',
-                  2000,
-                  '...cats and good whiskey',
+                  "I'm Anthony, Mainframe Developer",
+                  1000,
+                  'I mostly build with COBOL, and Golang',
+                  1000,
+                  'And I love modern web, cats and good whiskey !',
                   2000,
                 ]}
                 wrapper="span"
-                speed={10}
+                speed={30}
+                deletionSpeed={Infinity}
                 repeat={Infinity}
               />
             </div>
           </h1>
           <p className="text-[#ADB7BE] text-lg mb-6 lg:text-xl">
-            Currently devoted to learn Rust, Embbeded stuff and some pentesting
+            Currently COBOL developer at IBM, and a cybersecurity enthusiast by night. I'm always on the lookout for a good vulnerability to crack.
           </p>
           <div>
             <button className="font-semibold px-6 py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-purple-700 to-purple-400 hover:bg-slate-200 text-white">
               <a href="mailto:pizzoni.anthony@gmail.com">Hire Me</a>
             </button>
             <button className="px-1 py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-purple-700 to-purple-200 hover:bg-slate-200 text-white mt-3">
-              <a href="/AnthonyPizzoni_02-01-24.pdf" download>
+              <a href="/CV_AnthonyPizzoni-15-07-25.pdf" download>
                 <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-4 py-2">
                   Download CV
                 </span>

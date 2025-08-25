@@ -1,29 +1,27 @@
 import { FaGithub, FaLinkedin, FaMedium, FaDiscord } from 'react-icons/fa';
-import { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import { useForm, ValidationError } from '@formspree/react';
 
 const env = import.meta.env;
 
 const Contact = () => {
-  const formRef = useRef(null);
+  // use the useForm hook of Formspree
+  const [state, handleSubmit] = useForm(import.meta.env.VITE_FORMSPREE_ID);
 
-  const sendEmail = e => {
-    e.preventDefault();
-    emailjs
-      .sendForm(env.VITE_SERVICE_ID, env.VITE_TEMPLATE_ID, formRef.current, {
-        publicKey: env.VITE_PUBLIC_KEY,
-      })
-      .then(() => {
-        console.log('success');
-      }),
-      err => {
-        console.log(err.message);
-      };
-  };
+  // form successful ? display thx message
+  if (state.succeeded) {
+    return (
+      <div className='text-center text-white py-24'>
+        <h5 className="text-2xl font-bold text-purple-400 my-2">
+          Thanks for the message !
+        </h5>
+        <p className="text-[#ADB7Be] text-lg mb-4 max-w-md mx-auto py-5 px-2">
+          I will get back to you as soon as possible.
+        </p>
+      </div>
+    );
+  }
 
-  const resetForm = () => {
-    formRef.current.reset();
-  };
+ 
   return (
     <section
       id="contact"
@@ -60,12 +58,7 @@ const Contact = () => {
         </div>
       </div>
       <div>
-        <form
-          ref={formRef}
-          onSubmit={sendEmail}
-          className="flex flex-col"
-          id="contact"
-        >
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="mb-6">
             <label
               htmlFor="email"
@@ -76,10 +69,12 @@ const Contact = () => {
             <input
               type="email"
               id="email"
+              name="email"
               required
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg w-full p-2.5"
-              placeholder="jacob@google.com"
+              placeholder="schwarzi@google.com"
             />
+            <ValidationError prefix='Email' field='email' errors={state.errors} />
           </div>
           <div className="mb-6">
             <label
@@ -91,6 +86,7 @@ const Contact = () => {
             <input
               type="text"
               id="subject"
+              name="subject"
               required
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg w-full p-2.5"
               placeholder="Just saying hi!"
@@ -101,18 +97,21 @@ const Contact = () => {
               htmlFor="message"
               placeholder="Lets talk about Irish whiskey..."
               className="text-white block mb-2 text-sm font-medium"
-            />
+            >
+              Message
+            </label>  
             <textarea
               name="message"
               id="message"
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg w-full p-2.5"
               placeholder="Please tell me what is your favorite whiskey..."
             />
+            <ValidationError prefix='Message' field='message' errors={state.errors} />
           </div>
           <button
             type="submit"
-            onClick={resetForm}
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+            disabled={state.submitting}
           >
             Send message
           </button>
