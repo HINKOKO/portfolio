@@ -36,7 +36,7 @@ const HeroSection = () => {
               <a href="mailto:pizzoni.anthony@gmail.com">Hire Me</a>
             </button>
             <button className="px-1 py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-purple-700 to-purple-200 hover:bg-slate-200 text-white mt-3">
-              <a href="/CV_AnthonyPizzoni-15-07-25.pdf" download>
+              <a href="/CV_Pizzoni_Anthony_12-08-25.pdf" download>
                 <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-4 py-2">
                   Download CV
                 </span>
